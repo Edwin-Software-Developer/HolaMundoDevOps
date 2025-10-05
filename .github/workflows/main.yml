@@ -1,0 +1,26 @@
+name: Notificación de Integración Continua
+
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  enviar_notificacion:
+    runs-on: ubuntu-latest
+
+    steps:
+     
+      - name: Verificar el repositorio
+        uses: actions/checkout@v4
+
+     
+      - name: Ejecutar programa Hola Mundo
+        run: |
+          echo "Ejecutando el programa Hola Mundo..."
+          node hola.js
+
+      - name: Enviar notificación a ntfy.sh
+        run: |
+          curl -d "Se ha subido nuevo código a la rama main del repositorio $GITHUB_REPOSITORY ✅" https://ntfy.sh/devops-itla
